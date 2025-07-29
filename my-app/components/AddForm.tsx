@@ -1,8 +1,13 @@
 
 
 const AddForm = () => {
+    async function create() {
+        "use server"
+    }
+
+
   return (
-      <form action="" className="text-black w-full max-w-xl mx-auto flex flex-col justify-center
+      <form action={create} className="text-black w-full max-w-xl mx-auto flex flex-col justify-center
        items-center space-y-4 mt-3 md:mt-5">
           <div className="flex flex-col w-full">
               <label htmlFor="">Product Image:</label>
