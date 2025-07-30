@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
+import { set } from "mongoose";
 
 interface Product {
     image: string;
@@ -24,7 +25,7 @@ const UpdateForm = ({productId}: {productId: string}) => {
     const [product, setProduct] = useState<Product>()
 
     useEffect(() => { 
-        axios.get(`/api/product/${productId}`)
+        axios.get(`/api/product/${productId}`).then((response) => setProduct(response.data.product));
     }, [])
     
 
