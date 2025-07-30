@@ -4,13 +4,31 @@
 import { addAction } from "@/utils/addAction"
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
+import axios from "axios";
+
+interface Product {
+    image: string;
+    _id: string;
+    name: string;
+    price: number;
+    link: string;
+    description: string;
+}
 
 
-const UpdateForm = () => {
+const UpdateForm = ({productId}: {productId: string}) => {
     const router = useRouter();
     const [imageURL, setImageURL] = useState("");
+    const [product, setProduct] = useState<Product>()
+
+    useEffect(() => { 
+        axios.get(`/api/product/${productId}`)
+    }, [])
+    
+
+
     async function clientAddAction(formData: FormData) {
         const { error, success } = await addAction(formData);
         if (error) {
