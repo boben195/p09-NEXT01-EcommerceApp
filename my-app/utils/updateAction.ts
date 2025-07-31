@@ -11,7 +11,7 @@ export async function updateAction(formData: FormData, id: string) {
         const link = formData.get("link");
         const description = formData.get("description");
 
-        if (!image || !name || !price || !link || !description) {
+        if ( !name || !price || !link || !description) {
             throw new Error("All fields are required");
         }
 
