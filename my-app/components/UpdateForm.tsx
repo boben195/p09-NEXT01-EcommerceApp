@@ -27,6 +27,13 @@ const UpdateForm = ({productId}: {productId: string}) => {
     useEffect(() => { 
         axios.get(`/api/product/${productId}`).then((response) => setProduct(response.data.product));
     }, [])
+
+
+    useEffect(() => {
+        if (product) {
+            setImageURL(product.image);
+        }
+    }, [product]);
     
 
 
@@ -66,19 +73,23 @@ const UpdateForm = ({productId}: {productId: string}) => {
           </div>
           <div className="flex flex-col w-full">
               <label htmlFor="">Name</label>
-              <input type="text" name="name" placeholder="Enter product name" className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500"/>
+              <input type="text" name="name" defaultValue={product?.name}
+                placeholder="Enter product name" className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500" />
           </div>
           <div className="flex flex-col w-full">
               <label htmlFor="">Price:</label>
-              <input type="number" name="price" placeholder="Enter product price" className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500"/>
+              <input type="number" name="price" defaultValue={product?.price}
+                placeholder="Enter product price" className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500" />
           </div>
           <div className="flex flex-col w-full">
               <label htmlFor="">Sellers Link:</label>
-              <input type="text" name="link" placeholder="Link to where buyers can find you" className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500"/>
+              <input type="text" name="link" defaultValue={product?.link}
+                placeholder="Link to where buyers can find you" className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500" />
           </div>
           <div className="flex flex-col w-full">
               <label htmlFor="">Description</label>
-              <textarea name="description" placeholder="Enter the product description" rows={4} className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500"></textarea>
+              <textarea name="description" defaultValue={product?.description}
+                placeholder="Enter the product description" rows={4} className="w-full px-3 py-1.5 md:py-2 text-[#252422] rounded-lg bg-white border border-gray-500"></textarea>
           </div>
           <button type="submit" className="w-full bg-[#212529] text-white px-3 py-2 rounded-md cursor-pointer">Update Product</button>
     </form>
