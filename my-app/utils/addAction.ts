@@ -41,7 +41,7 @@ export async function addAction(formData: FormData) {
         await Product.create({
             image: imageResponse.secure_url,
             name,
-            price: parseFloat(price as string),/////??? its a string
+            price: parseFloat(price as string),
             link,
             description,
         });
