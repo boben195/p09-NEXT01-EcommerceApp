@@ -35,7 +35,11 @@ export async function updateAction(formData: FormData, id: string) {
         const parts = product.image.split("/");
         const fileName = parts[parts.length - 1];
         const imageId = fileName.split(".")[0];
-      }
+        cloudinary.uploader.destroy(`watch/${imageId}`).then((result) => {
+          console.log("Image deleted from Cloudinary: ", result);
+        })
+          
+      
         
 
         const arrayBuffer = await image.arrayBuffer();
