@@ -15,7 +15,27 @@ export async function updateAction(formData: FormData, id: string) {
             throw new Error("All fields are required");
         }
 
-        await connectDB()
+      await connectDB()
+      
+      const product = await Product.findById(id);
+      if (!product) {
+          throw new Error("Product not found");
+      }
+
+      if (image.size === 0) {
+        await Product.findByIdAndUpdate(id, {
+            name,
+            price: parseFloat(price as string),
+            link,
+            description,
+        });
+      
+        return { success: true, message: "Product updated successfully" };
+      } else {
+        const parts = product.image.split("/");
+        const fileName = parts[parts.length - 1];
+        const imageId = fileName.split(".")[0];
+      }
         
 
         const arrayBuffer = await image.arrayBuffer();
